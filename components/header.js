@@ -20,7 +20,7 @@ const Wrapper = styled.div`
   padding: 20px 0;
 `;
 const StyledNav = styled.nav`
-  display: ${(props) => (props.mobilenavactive == "true" ? "block" : "none")};
+  display: ${(props) => (props.$mobilenavactive == "true" ? "block" : "none")};
   gap: 15px;
   position: fixed;
   top: 0px;
@@ -67,7 +67,7 @@ export default function Header() {
       <Center>
         <Wrapper>
           <Logo href={"/"}>Ecommerce</Logo>
-          <StyledNav mobilenavactive={mobilenavactive.toString()}>
+          <StyledNav $mobilenavactive={mobilenavactive.toString()}>
             <NavLink href={"/"}>Home</NavLink>
             <NavLink href={"/products"}>All Products</NavLink>
             <NavLink href={"/categories"}>Categories</NavLink>

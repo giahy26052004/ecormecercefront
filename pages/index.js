@@ -11,12 +11,12 @@ export default function HomePage({
   newProducts,
   slideShowProduct,
 }) {
-  console.log({ slideShowProduct });
+  console.log("show", slideShowProduct );
   return (
     <div>
       <Header />
       <Feature
-        image={slideShowProduct?.images || []}
+        image={slideShowProduct[0]?.images || []}
         product={feateredProduct}
       />
       <NewProducts newProducts={newProducts} />

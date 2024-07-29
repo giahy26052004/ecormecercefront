@@ -49,6 +49,7 @@ const Column = styled.div`
 `;
 function Feature({ product, image }) {
   const { addProduct } = useContext(CartContext);
+  console.log("anh", image);
   function addFeaturedToCart() {
     addProduct(product._id);
   }
