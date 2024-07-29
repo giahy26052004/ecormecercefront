@@ -30,16 +30,18 @@ const Price = styled.span`
 `;
 function ProductPage({ product }) {
   const { addProduct } = useContext(CartContext);
+  if (!product) return;
+
   return (
     <>
       <Header />
       <Center>
         <ColumnWrapper>
-            <ProductImage images={product.images} />
+          <ProductImage images={product.images} />
           <div>
-            <Title>{product.title}</Title>
+            <Title>{product?.title || ""}</Title>
 
-            <p>{product.description}</p>
+            <p>{product?.description || ""}</p>
 
             <PriceRow>
               <Price> ${product.price}</Price>

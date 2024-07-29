@@ -52,14 +52,15 @@ function Feature({ product, image }) {
   function addFeaturedToCart() {
     addProduct(product._id);
   }
+  if (!product) return;
   return (
     <Bg>
       <Center>
         <Wrapper>
           <Column>
             <div>
-              <Title>{product.title}</Title>
-              <Desc>{product.description}</Desc>
+              <Title>{product?.title || ""}</Title>
+              <Desc>{product?.description || ""}</Desc>
               <ButtonWrapper>
                 <ButtonLink
                   href={"/products/" + product._id}

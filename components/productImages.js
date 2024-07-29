@@ -35,6 +35,7 @@ const ImageButton = styled.div`
 `;
 function ProductImage({ images }) {
   const [activeImage, setActiveImage] = useState(images?.[0]);
+  
   return (
     <WhileBox>
       <WrapperImage>

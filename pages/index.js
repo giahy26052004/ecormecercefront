@@ -15,7 +15,10 @@ export default function HomePage({
   return (
     <div>
       <Header />
-      <Feature image={slideShowProduct[0].images} product={feateredProduct} />
+      <Feature
+        image={slideShowProduct?.images || []}
+        product={feateredProduct}
+      />
       <NewProducts newProducts={newProducts} />
       <Footer />
     </div>
@@ -30,6 +33,8 @@ export async function getServerSideProps() {
     limit: 10,
   });
   const slideShowProduct = await Product.find({ title: "Iphone 14 pro" });
+  console.log(slideShowProduct);
+
   return {
     props: {
       feateredProduct: JSON.parse(JSON.stringify(feateredProduct)),

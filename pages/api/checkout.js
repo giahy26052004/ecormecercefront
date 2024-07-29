@@ -8,8 +8,7 @@ export default async function handle(req, res) {
     return;
   }
 
-  const { name, email, city, streetAddress, phone, products } =
-    req.body;
+  const { name, email, city, streetAddress, phone, products } = req.body;
   await mongooseConnect();
   const productIds = products.split(",");
   const uniqueIds = [...new Set(productIds)];
@@ -25,7 +24,7 @@ export default async function handle(req, res) {
         quantity,
         price_data: {
           currency: "USD",
-          product_data: { name: productInfo.title },
+          product_data: { name: productInfo?.title || "" },
           unit_amount: quantity * productInfo.price,
         },
       });
