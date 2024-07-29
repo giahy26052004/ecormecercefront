@@ -179,7 +179,7 @@ const ChatBot = () => {
       const updatedMessages = [...messages, userMessage]; // Include previous messages
       setMessages(updatedMessages);
 
-      fetch("https://ai-chatbot-vgs4.onrender.com/predict/predict", {
+      fetch("https://ai-chatbot-vgs4.onrender.com/predict", {
         method: "POST",
         mode: "cors",
         headers: {
