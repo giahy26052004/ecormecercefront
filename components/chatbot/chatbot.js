@@ -5,8 +5,10 @@ import styled from "styled-components";
 const ChatboxContainer = styled.div`
   position: fixed;
   bottom: 50px;
+  z-index: 20;
   right: 20px;
   .chatbox__button {
+    position: relative;
     margin-bottom: 20px;
     width: 50px;
     height: 50px;
@@ -15,11 +17,10 @@ const ChatboxContainer = styled.div`
 `;
 
 const SupportContainer = styled.div`
-  display: flex;
   flex-direction: column;
   background: #f9f9f9;
-  width: 350px;
-  height: 400px;
+  width: 0px;
+  height: 0px;
   z-index: -123456;
   margin-top: 5px;
   opacity: 0;
@@ -27,7 +28,11 @@ const SupportContainer = styled.div`
   padding: 10px;
   border-radius: 10px;
   &.chatbox--active {
+    display: flex;
+    transition: all 0.5s ease-in-out;
     transform: translateY(-40px);
+    width: 350px;
+    height: 400px;
     z-index: 123456;
     opacity: 1;
   }
@@ -164,16 +169,16 @@ const ChatBot = () => {
 
     const toggleState = () => {
       setIsOpen(!isOpen);
-      if (!isOpen) {
+      if (isOpen === true) {
         chatBox.classList.add("chatbox--active");
       } else {
         chatBox.classList.remove("chatbox--active");
       }
     };
-
     const onSendMessage = () => {
       const text = inputField.value.trim();
       if (text === "" || isSendingRef.current) return;
+      isSendingRef.current = true;
 
       const userMessage = { name: "User", message: text };
       const updatedMessages = [...messages, userMessage]; // Include previous messages
@@ -215,7 +220,7 @@ const ChatBot = () => {
       sendButton.removeEventListener("click", onSendMessage);
       inputField.removeEventListener("keyup", onSendMessage);
     };
-  }, [isOpen, messages]);
+  }, [isOpen, isSendingRef.current]);
 
   const updateChatText = () => {
     return messages.slice().map((item, index) => {
@@ -267,24 +272,23 @@ const ChatBot = () => {
           </SendButton>
         </Footer>
       </SupportContainer>
-      <div className="chatbox__button">
-        <ButtonChatBot className="chatbox__button">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="size-6 chatbox__button-img"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"
-            />
-          </svg>
-        </ButtonChatBot>
-      </div>
+
+      <ButtonChatBot className="chatbox__button">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="size-6 chatbox__button-img"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"
+          />
+        </svg>
+      </ButtonChatBot>
     </ChatboxContainer>
   );
 };

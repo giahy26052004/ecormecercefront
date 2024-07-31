@@ -64,7 +64,7 @@ function Feature({ product, image }) {
               <Desc>{product?.description || ""}</Desc>
               <ButtonWrapper>
                 <ButtonLink
-                  href={"/products/" + product._id}
+                  href={"/product/" + product._id}
                   outline="true"
                   while="true"
                   size="l"

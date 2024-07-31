@@ -3,7 +3,6 @@ export const CartContext = createContext({});
 export default function CartContextProvider({ children }) {
   const ls = typeof window !== "undefined" ? window.localStorage : null;
   const [cartProducts, setCartProducts] = useState([]);
-  console.log("cart", cartProducts);
 
   useEffect(() => {
     if (cartProducts?.length > 0) {

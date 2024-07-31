@@ -18,13 +18,15 @@ const ModalContainer = styled.div`
 
 const ModalContent = styled.div`
   background-color: #00183b;
-  width: 400px;
+  width: 300px;
+  @media screen and (min-width: 768px) {
+    width: 400px;
+  }
   display: flex;
   color: #fff;
   padding: 0 20px;
   align-items: center;
   justify-content: center;
-
 
   margin: 5% auto;
 
@@ -131,7 +133,6 @@ const RingLoaderStyled = styled.div`
   align-items: center;
   justify-content: center;
   margin: 30px;
-
 `;
 
 export const Modal = ({

@@ -7,7 +7,7 @@ import axios from "axios";
 import styled from "styled-components";
 import Table from "@/components/table";
 import Input from "@/components/input";
-import { Modal } from "@/components/modal";
+import { Modal } from "@/components/modalPayment";
 import { Router, useRouter } from "next/router";
 const ColumnWrapper = styled.div`
   display: grid;
@@ -42,6 +42,14 @@ const ProductImageBox = styled.div`
 `;
 const QuantityLabel = styled.span`
   padding: 0 3px;
+`;
+const WrapperButtonQuanlity = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
 `;
 const CityHolder = styled.span`
   display: flex;
@@ -142,9 +150,7 @@ export default function CartPage() {
         <ColumnWrapper>
           <Box>
             <h2>Cart</h2>
-            {!cartProducts?.length && (
-              <div>Your cart is empty </div>
-            )}
+            {!cartProducts?.length && <div>Your cart is empty </div>}
 
             {products?.length > 0 && (
               <Table>
@@ -165,23 +171,27 @@ export default function CartPage() {
                         {product.title}{" "}
                       </ProductInfoCell>
                       <td>
-                        <Button
-                          onClick={() => {
-                            lessOfThisProduct(product._id);
-                          }}
-                        >
-                          -
-                        </Button>
-                        <QuantityLabel>
-                          {" "}
-                          {
-                            cartProducts.filter((id) => id === product._id)
-                              .length
-                          }
-                        </QuantityLabel>
-                        <Button onClick={() => moreOfThisProduct(product._id)}>
-                          +
-                        </Button>
+                        <WrapperButtonQuanlity>
+                          <Button
+                            onClick={() => {
+                              lessOfThisProduct(product._id);
+                            }}
+                          >
+                            -
+                          </Button>
+                          <QuantityLabel>
+                            {" "}
+                            {
+                              cartProducts.filter((id) => id === product._id)
+                                .length
+                            }
+                          </QuantityLabel>
+                          <Button
+                            onClick={() => moreOfThisProduct(product._id)}
+                          >
+                            +
+                          </Button>
+                        </WrapperButtonQuanlity>
                       </td>
                       <td>
                         {cartProducts.filter((id) => id === product._id)
